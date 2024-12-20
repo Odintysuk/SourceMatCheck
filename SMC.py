@@ -1,9 +1,9 @@
-'''
+"""
 V.1.2.0
 
 Цветовая схема https://colorscheme.ru/#3uk1E4ih8xnI-
 
-'''
+"""
 import os
 from docx import Document
 import pandas as pd
@@ -200,10 +200,10 @@ class MainScreen(MDScreen):
         series_prep = text_item
                 
     def show_datepicker(self):
-        '''Окно выбора диапазон дат отчета
+        """Окно выбора диапазон дат отчета
         Вызывается нажатием кнопки 'выбрать дату отчета'
         
-        '''
+        """
         datepicker = MDModalInputDatePicker(mode='range',
                                             supporting_input_text='Укажите даты',
                                             supporting_text=' ',
@@ -216,12 +216,12 @@ class MainScreen(MDScreen):
         datepicker.open()
         
     def on_ok(self, instance_datepicker):
-        '''Вызывается нажатием кнопки "Ок" в окне выбора дат
+        """Вызывается нажатием кнопки "Ок" в окне выбора дат
         При указании начальной и конечной даты обновляет значения переменной
         self.daterange в формате [datetime.date(yyy, mm, dd), ...]
         Закрывает окно datepicker
         
-        '''
+        """
         
         if len(instance_datepicker.get_date()) > 1:
             print(instance_datepicker.get_date())
@@ -235,9 +235,9 @@ class MainScreen(MDScreen):
         return instance_datepicker.dismiss()
 
     def source_datas(self, folder):
-        '''
+        """
 
-        '''
+        """
         docslist = []
         series = pd.Series(dtype='string')
         
@@ -282,7 +282,7 @@ class MainScreen(MDScreen):
 
 
     def output_label(self, folder):
-        '''Формирует из полученного словаря текстовые строки
+        """Формирует из полученного словаря текстовые строки
         Обновляет текст в центральном поле приложения (ids['label'])
         на полученные строки
 
@@ -295,7 +295,7 @@ class MainScreen(MDScreen):
         Returns:
             None
         
-        '''
+        """
         # закрываем открытое окно popup
         self.view.dismiss()
         # 
@@ -303,13 +303,13 @@ class MainScreen(MDScreen):
 
     
     def name_report(self):
-        '''Вызывается нажатием кнопки 'Отчет'
+        """Вызывается нажатием кнопки 'Отчет'
         Popup-окно с полем для ввода названия сохраняемого файла
         
         Calls:
            foo report(): После подтверждения ввода текста (enter)
 
-        '''
+        """
         self.p_report = Popup(title='Название отчета',
                               title_color=[.3, .3, .3, 1],
                               content=TextInput(multiline=False,
@@ -328,7 +328,7 @@ class MainScreen(MDScreen):
         self.p_report.open()
 
     def articles_report(self):
-        '''articles_report(self)
+        """articles_report(self)
         Создает выборку  из БД временного диапазона из self.daterange
         Группирует БД по наименованию товара.
 
@@ -337,7 +337,7 @@ class MainScreen(MDScreen):
                 ДФ содержит столбцы 'Наименование сырья/материала' и
                 'Номер серии'(список артикулов)
 
-        '''
+        """
         # Изменим тип данных столбца Дата в date
         full_data_to_dates = self.full_data
         full_data_to_dates['Дата'] = pd.to_datetime(full_data_to_dates['Дата'])
