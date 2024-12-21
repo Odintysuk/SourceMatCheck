@@ -1,7 +1,8 @@
 """
 V.1.2.0
-
-Цветовая схема https://colorscheme.ru/#3uk1E4ih8xnI-
+Приложение позволяет выгружать данные расходных материалов из общего файла досье и схранять в отдельную БД расходки
+Работа с БД по расходке включает в себя фильтрацию по дате и формирования отчета по используемым материалам
+Используемая цветовая схема https://colorscheme.ru/#3uk1E4ih8xnI-
 
 """
 import os
@@ -77,9 +78,6 @@ MainScreen:
                         text: 'Добавить находящиеся в папке "Docs" \\n' \
                         'файлы досье в общую БД'
 
-                
-            
-                
             MDTopAppBarTrailingButtonContainer:
                 spacing: 5
                 id: btn_cnt_2
@@ -116,7 +114,6 @@ MainScreen:
                     MDTooltipPlain:
                         text: 'Сформировать отчет'
             
-                                    
             MDTopAppBarTitle:
                 markup: True
                 text: 'База данных досье РФЛП [sup]18[/sup]F-ФДГ'
@@ -128,8 +125,6 @@ MainScreen:
         MDBoxLayout:
             id: bottom_box
             orientation: 'vertical'
-                    
-        
                 
 """
 
@@ -145,7 +140,7 @@ class MainScreen(MDScreen):
         self.all_data = {}
         # загрузка текущей базы данных по досье
         self.full_data = pd.read_csv('full_data.csv', index_col=0)
-##        self.full_data = pd.DataFrame()
+##        self.full_data = pd.DataFrame() # раскомментить при необходимости обнулить БД
 
         # диапазон выборки досье
         self.daterange = [date(1678,1,1), date.today() + timedelta(days=1)]
